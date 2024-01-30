@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CircuitRepository extends JpaRepository<Circuit, Long> {
-    // Aquí puedes agregar consultas personalizadas si las necesitas
 }
-
