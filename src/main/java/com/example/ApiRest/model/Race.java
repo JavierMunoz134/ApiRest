@@ -1,4 +1,5 @@
 package com.example.ApiRest.model;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -45,6 +46,7 @@ public class Race {
             joinColumns = @JoinColumn(name = "race_id"),
             inverseJoinColumns = @JoinColumn(name = "driver_id")
     )
+    @JsonManagedReference
     private List<Driver> drivers;
 
 }

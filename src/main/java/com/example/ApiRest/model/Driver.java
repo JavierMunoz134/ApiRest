@@ -1,5 +1,6 @@
 package com.example.ApiRest.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class Driver {
     private Constructor constructor;
 
     @ManyToMany(mappedBy = "drivers")
+    @JsonManagedReference
     private List<Race> races;
 
 }
