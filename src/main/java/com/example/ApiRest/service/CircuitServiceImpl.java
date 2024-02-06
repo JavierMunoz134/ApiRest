@@ -1,7 +1,12 @@
 package com.example.ApiRest.service;
 
 import com.example.ApiRest.model.Circuit;
+import com.example.ApiRest.model.Driver;
 import com.example.ApiRest.repository.CircuitRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +15,7 @@ import java.util.Optional;
 
 @Service
 public class CircuitServiceImpl implements CircuitService {
+
     private final CircuitRepository circuitRepository;
 
     @Autowired
@@ -23,9 +29,10 @@ public class CircuitServiceImpl implements CircuitService {
     }
 
     @Override
-    public Optional<Circuit> getCircuitById(Long id) {
-        return circuitRepository.findById(id);
+    public Optional<Circuit> getCircuitByName(String name) {
+        return  circuitRepository.findByName(name);
     }
+
 
     @Override
     public Circuit saveCircuit(Circuit circuit) {
@@ -33,7 +40,11 @@ public class CircuitServiceImpl implements CircuitService {
     }
 
     @Override
-    public void deleteCircuit(Long id) {
-        circuitRepository.deleteById(id);
+    public void deleteCircuitByName(String name) {
+        circuitRepository.deleteByName(name);
     }
+
+
+
+
 }

@@ -1,12 +1,15 @@
 package com.example.ApiRest.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -15,28 +18,26 @@ public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "driverid")
-    private Long id;
+    private Long driverId;
 
-    @Column(name = "code", unique = true, nullable = false)
+    @Column(unique = true)
     private String code;
-    @Column(nullable = false)
     private String forename;
-    @Column(nullable = false)
     private String surname;
-    @Column(nullable = false)
     @JsonProperty("dateOfBirth")
     private LocalDate dob;
-    @Column(nullable = false)
     private String nationality;
     private String url;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "constructorid")
+    @JsonIgnoreProperties("driverList")
     private Constructor constructor;
 
-    @ManyToMany(mappedBy = "drivers")
-    @JsonManagedReference
-    private List<Race> races;
+    @OneToMany(mappedBy = "driver")
+    @JsonIgnore
+    private Set<Result> results = new HashSet<>();
+
+
 
 }
-

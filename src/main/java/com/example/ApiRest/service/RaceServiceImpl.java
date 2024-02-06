@@ -1,15 +1,16 @@
 package com.example.ApiRest.service;
 
+import com.example.ApiRest.model.Circuit;
 import com.example.ApiRest.model.Race;
 import com.example.ApiRest.repository.RaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RaceServiceImpl implements RaceService {
+
     private final RaceRepository raceRepository;
 
     @Autowired
@@ -23,8 +24,8 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    public Optional<Race> getRaceById(Long id) {
-        return raceRepository.findById(id);
+    public List<Race> getRacesByCircuitId(Circuit circuitId) {
+        return raceRepository.findByCircuit(circuitId);
     }
 
     @Override
@@ -33,7 +34,7 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    public void deleteRace(Long id) {
-        raceRepository.deleteById(id);
+    public void deleteRace(Long raceId) {
+        raceRepository.deleteById(raceId);
     }
 }

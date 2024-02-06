@@ -1,52 +1,57 @@
 package com.example.ApiRest.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 @Entity
+@Data
 @Table(name = "races")
 public class Race {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "raceid")
-    private Long id;
+    private Long raceid;
 
-    @Column(nullable = false)
+    @Column(name = "year")
     private Integer year;
 
-    @Column(nullable = false)
+    @Column(name = "round")
     private Integer round;
 
-    @ManyToOne
-    @JoinColumn(name = "circuitid", nullable = false)
+
+    //clave foranea
+    @JsonManagedReference
+    @OneToOne()
+    @JoinColumn(name = "circuitid")
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private Circuit circuit;
 
-    @Column(nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(nullable = false)
-    private LocalDate date;
+    @Column(name = "date")
+    private Date date;
 
-    @Column(nullable = false)
-    private LocalTime time;
+    @Column(name = "time")
+    private Time time;
 
+    @Column(name = "url")
     private String url;
 
-    @ManyToMany
-    @JoinTable(
-            name = "result",
-            joinColumns = @JoinColumn(name = "race_id"),
-            inverseJoinColumns = @JoinColumn(name = "driver_id")
-    )
-    @JsonManagedReference
-    private List<Driver> drivers;
+
+    @OneToMany(mappedBy = "race")
+    @JsonIgnore
+    private Set<Result> results = new HashSet<>();
+
 
 }
