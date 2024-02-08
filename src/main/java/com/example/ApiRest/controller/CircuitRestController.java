@@ -2,7 +2,9 @@ package com.example.ApiRest.controller;
 
 
 import com.example.ApiRest.model.Circuit;
+import com.example.ApiRest.projection.CircuitProjection;
 import com.example.ApiRest.service.CircuitService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +40,19 @@ public class CircuitRestController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("")
+    public ResponseEntity<List<CircuitProjection>> findAllBy() {
+        return ResponseEntity.ok(circuitService.findAllBy());
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<CircuitProjection>> getAllPagedAndSorted(@RequestParam(defaultValue = "0") int page,
+                                                                    @RequestParam(defaultValue = "10") int size,
+                                                                    @RequestParam(defaultValue = "code") String sortBy,
+                                                                    @RequestParam(defaultValue = "ASC") String sortDirection) {
+        Page<CircuitProjection> CircuitPage = this.circuitService.getAllCircuitPaged(page, size, sortBy, sortDirection);
+        return ResponseEntity.ok(CircuitPage.getContent());
+    }
     @PostMapping("/circuits")
     public ResponseEntity<Circuit> create(@RequestBody Circuit circuit){
         if(circuit.getCircuitid() != null)
