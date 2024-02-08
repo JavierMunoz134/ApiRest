@@ -1,7 +1,6 @@
 package com.example.ApiRest.service;
 import com.example.ApiRest.model.Result;
 import com.example.ApiRest.repository.ResultRepository;
-import com.example.ApiRest.repository.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -23,9 +23,9 @@ public class Constructor {
     private String nationality;
     private String url;
 
-    @OneToMany(mappedBy = "constructor", fetch = FetchType.LAZY)
-    private List<Driver> drivers;
-    public List<Driver> getDrivers() {
-        return drivers;
-    }
+    //@OneToMany(mappedBy = "constructor", fetch = FetchType.LAZY)
+    //private List<Driver> drivers;
+    //public List<Driver> getDrivers() {
+        //return drivers;
+    //}
 }

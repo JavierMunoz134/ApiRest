@@ -1,31 +1,39 @@
 package com.example.ApiRest.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "results")
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resultid")
-    private Long id;
+    private Long resultId;
 
     @ManyToOne
-    @JoinColumn(name = "raceid", nullable = false)
+    @JoinColumn(name = "raceid")
     private Race race;
 
     @ManyToOne
-    @JoinColumn(name = "driverid", nullable = false)
+    @JoinColumn(name = "driverid")
+    @JsonIgnoreProperties
     private Driver driver;
 
-    @Column(nullable = false)
+
+    @Column(name = "grid", nullable = false)
     private Integer grid;
 
+    @Column(name = "position")
     private Integer position;
 
-    @Column(nullable = false)
+    @Column(name = "points", nullable = false)
     private Integer points;
+
 
 
 }

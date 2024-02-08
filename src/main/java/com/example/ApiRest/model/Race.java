@@ -52,6 +52,5 @@ public class Race {
     @OneToMany(mappedBy = "race")
     @JsonIgnore
     private Set<Result> results = new HashSet<>();
-
-
 }
+
