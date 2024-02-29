@@ -12,9 +12,7 @@ import java.util.Optional;
 @Repository
 public interface DriverRepository extends JpaRepository<Driver, Long> {
 
-    //metodo buscar pilotos por su codigo
     Optional<Driver> findByCodeIgnoreCase(String code);
 
-    //metodo borrar driver por id
     void deleteByCode(String code);
 }

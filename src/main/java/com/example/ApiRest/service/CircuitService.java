@@ -8,22 +8,18 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.Optional;
 
-
-
 public interface CircuitService {
 
     List<Circuit> getAllCircuits();
 
     Optional<Circuit> getCircuitByName(String name  );
 
+    //definicion metodo guardar circuito
     Circuit saveCircuit(Circuit circuit);
 
+    //definicion metodo borrar driver por codigo
     void deleteCircuitByName(String name);
 
-    List<CircuitProjection> findAllBy();
-
     Page<CircuitProjection> getAllCircuitPaged(int pageNo, int pageSize, String sortBy, String sortDirection);
-
-
 
 }

@@ -18,7 +18,6 @@ public class ResultRestController {
         this.resultService = resultService;
     }
 
-    // Obtener todos los resultados
     @GetMapping("/all")
     public ResponseEntity<List<Result>> getAllResults() {
         List<Result> results = resultService.findAll();

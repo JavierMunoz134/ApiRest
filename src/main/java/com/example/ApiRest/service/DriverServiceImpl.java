@@ -21,27 +21,23 @@ public class DriverServiceImpl implements DriverService{
         this.repository = repository;
     }
 
-    //devolver todos los drivers DTO
     @Override
     public List<DriverDTO> getAllDrivers() {
         List<Driver> drivers = repository.findAll();
         return drivers.stream().map(DriverDTO::new).collect(Collectors.toList());
     }
 
-    //implementacion metodo buscar driver por ID
     @Override
     public Optional<Driver> getDriverByCode(String code) {
         return repository.findByCodeIgnoreCase(code);
     }
 
 
-    //implementacion metodo guardar driver
     @Override
     public Driver saveDriver(Driver driver) {
         return repository.save(driver);
     }
 
-    //implementacion metodo borrar piloto por ID
     @Override
     public void deleteDriverByCode(String code) {
         repository.deleteByCode(code);

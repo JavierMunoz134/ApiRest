@@ -9,8 +9,6 @@ import java.util.List;
 @Service
 public class ResultServiceImpl implements ResultService {
 
-
-
     private final ResultRepository resultRepository;
 
     @Autowired
